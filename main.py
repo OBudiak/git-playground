@@ -23,9 +23,17 @@ def guess_is_valid(candidate):
             return False
     return True
 
+def repeated_words(answer):
+    if answer in answers:
+        print(f"You can not use this word again {answer}")
+        return True
+    return False
+
 
 guessed = 0
 errors = 0
+
+answers = []
 
 guesses = []
 
@@ -43,8 +51,13 @@ print(f"Your word is '{word}'")
 while not is_game_over():
     guess = input("Your next take: ")
 
+    if repeated_words(guess):
+        continue
+
     if not guess_is_valid(guess):
         continue
+
+    answers.append(guess)
 
     if guess in full_list:
         guessed += 1
